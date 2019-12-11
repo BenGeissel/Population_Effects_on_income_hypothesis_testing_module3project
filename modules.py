@@ -168,3 +168,33 @@ def hypothesis(p_value):
         print('Reject Null Hypothesis')
     else:
         print('Fail to Reject Null Hypothesis')
+        
+        
+def z_data(pop_df, sample_df):
+    '''
+    Function to generate normalized distribution of data (standard normal).
+    
+    Input: Population Dataframe and Sample Dataframe.
+    
+    Output: Normalized distribution lists for both median income and unemployment.
+    '''
+    
+    income_z_data = [(x - pop_df.Median_Household_Income_2017.mean()) / pop_df.Median_Household_Income_2017.std()
+                     for x in sample_df.Median_Household_Income_2017]
+    UE_z_data = [(x - pop_df.Unemployment_rate_2017.mean()) / pop_df.Unemployment_rate_2017.std()
+                     for x in sample_df.Unemployment_rate_2017]
+    
+    return income_z_data, UE_z_data
+
+
+def z_plot(pop_z, sample_z, title):
+    fig, ax = plt.subplots()
+    sns.set_style('darkgrid')
+    sns.distplot(pop_z, hist = False, ax = ax, color = 'Blue', hist_kws=dict(alpha=.8), label = 'Population')
+    sns.distplot(sample_z, hist = False, ax = ax, color = 'red', hist_kws=dict(alpha=.8), label = title.split(' ')[0])
+    plt.axvline(x = np.mean(sample_z), color = 'red', linestyle = '--')
+    plt.xlabel('Z-Score')
+    plt.ylabel('Distribution Amount')
+    plt.title(f'{title} Z-Distribution')
+    plt.legend()
+    plt.show()
