@@ -139,16 +139,32 @@ def calculate_means_stds(df):
     return income_mean, income_std, UE_mean, UE_std
 
 
-def z_test(x_bar, n, mu, sigma):
+def z_test(x_bar, mu, sigma):
     '''
     Function to calculate z-statistic and p-value.
     
-    Input: x_bar, n, mu, sigma.
+    Input: x_bar, mu, sigma.
     
     Output: Z-statistic and P-value.
     '''
     
-    z = (x_bar - mu)/(sigma/np.sqrt(n))
+    z = (x_bar - mu)/(sigma)
     p = 1 - st.norm.cdf(z)
     
     return z, p
+
+
+def hypothesis(p_value):
+    '''
+    Function to evaluate p-value to reject or fail to reject null hypothesis.
+    
+    Input: P-value.
+    
+    Output: Print statement evaluation.
+    '''
+    
+    alpha = .05
+    if p_value < alpha:
+        print('Reject Null Hypothesis')
+    else:
+        print('Fail to Reject Null Hypothesis')
