@@ -33,6 +33,10 @@ def census_api_data_cleaner():
     #Change population data to integer from string.
     pop_df.POP = pop_df.POP.astype('int')
     
+    #Remove unwanted columns.
+    del pop_df['state']
+    del pop_df['county']
+    
     return pop_df
 
 
@@ -88,7 +92,7 @@ def classify_county_populations(df1, df2):
     '''
     
     #Merge dataframes.
-    pop_df1 = df1.merge(df2, on = 'FIPS', how = 'inner')
+    pop_df1 = df1.merge(df2[['FIPS', 'County_State', 'Percent_Rural']], on = 'FIPS', how = 'inner')
     
     #Bin in to population categories based on rural percentage.
     pop_df1['pop_category'] = pop_df1.Percent_Rural.map(lambda x: rural_marker(x))
