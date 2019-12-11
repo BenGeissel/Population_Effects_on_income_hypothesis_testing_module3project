@@ -106,6 +106,8 @@ def income_unemployment_cleaner(csv_file):
 
     df = pd.read_csv(csv_file)
     df_2017 = df[['FIPS',"State","Area_name","Unemployment_rate_2017","Median_Household_Income_2017"]]
+    
+    # 
     df_2017 = df_2017.dropna()
     df_2017['Median_Household_Income_2017'] = df_2017.Median_Household_Income_2017.apply(lambda x: x.replace('$',''))
     df_2017['Median_Household_Income_2017'] = [col.replace(',', '') for col in df_2017.Median_Household_Income_2017]
