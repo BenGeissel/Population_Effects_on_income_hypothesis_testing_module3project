@@ -116,14 +116,39 @@ def income_unemployment_cleaner(csv_file):
     df_2017['Median_Household_Income_2017'] = df_2017.Median_Household_Income_2017.apply(lambda x: x.replace('$',''))
     df_2017['Median_Household_Income_2017'] = [col.replace(',', '') for col in df_2017.Median_Household_Income_2017]
     df_2017['Median_Household_Income_2017'] = df_2017['Median_Household_Income_2017'].astype("int")
-    df_2017['Unemployment_rate_2017'] = df_2017['Unemployment_rate_2017'].astype("int")
+    df_2017['Unemployment_rate_2017'] = df_2017['Unemployment_rate_2017'].astype("float")
     df_2017['FIPS'] = df_2017['FIPS'].apply(lambda x: "{0:0=5d}".format(x))
     
     return df_2017
     
     
+def calculate_means_stds(df):
+    '''
+    Function to calculate means and standard deviations for a dataframe for both unemployment and median income.
     
+    Input: Dataframe.
     
+    Output: Income mean, Income standard deviation, Unemployment mean, Unemployment standard deviation.
+    '''
     
+    income_mean = df.Median_Household_Income_2017.mean()
+    income_std = df.Median_Household_Income_2017.std()
+    UE_mean = df.Unemployment_rate_2017.mean()
+    UE_std = df.Unemployment_rate_2017.std()
     
+    return income_mean, income_std, UE_mean, UE_std
+
+
+def z_test(x_bar, n, mu, sigma):
+    '''
+    Function to calculate z-statistic and p-value.
     
+    Input: x_bar, n, mu, sigma.
+    
+    Output: Z-statistic and P-value.
+    '''
+    
+    z = (x_bar - mu)/(sigma/np.sqrt(n))
+    p = 1 - st.norm.cdf(z)
+    
+    return z, p
