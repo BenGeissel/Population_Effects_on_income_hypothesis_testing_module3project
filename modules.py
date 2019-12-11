@@ -1,15 +1,11 @@
 import requests
 import json
 import pandas as pd
-import geopandas as gpd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import csv
 import math
-import descartes
-import geoplot
-import plotly.figure_factory as ff
 import scipy.stats as st
 
 def census_api_data_cleaner():
@@ -98,3 +94,30 @@ def classify_county_populations(df1, df2):
     pop_df1['pop_category'] = pop_df1.Percent_Rural.map(lambda x: rural_marker(x))
     
     return pop_df1
+
+def income_unemployment_cleaner(csv_file):
+    ''' 
+    Function to clean income and unemployment data, remove currency symbol, comma, convert string to int 
+   
+    Input: median income and unemployment dataset
+    
+    Output: cleaned dataset by FIPS code 
+    '''
+
+    df = pd.read_csv(csv_file)
+    df_2017 = df[['FIPS',"State","Area_name","Unemployment_rate_2017","Median_Household_Income_2017"]]
+    df_2017 = df_2017.dropna()
+    df_2017['Median_Household_Income_2017'] = df_2017.Median_Household_Income_2017.apply(lambda x: x.replace('$',''))
+    df_2017['Median_Household_Income_2017'] = [col.replace(',', '') for col in df_2017.Median_Household_Income_2017]
+    df_2017['Median_Household_Income_2017'] = df_2017['Median_Household_Income_2017'].astype("int")
+    df_2017['Unemployment_rate_2017'] = df_2017['Unemployment_rate_2017'].astype("int")
+    df_2017['FIPS'] = df_2017['FIPS'].apply(lambda x: "{0:0=5d}".format(x))
+    
+    return df_2017
+    
+    
+    
+    
+    
+    
+    
