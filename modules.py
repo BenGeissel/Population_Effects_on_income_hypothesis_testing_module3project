@@ -188,6 +188,14 @@ def z_data(pop_df, sample_df):
 
 
 def z_plot(pop_z, sample_z, title):
+    '''
+    Function to plot results of z-test for each hypothesis test.
+    
+    Input: Population z values, Sample z values, Name for graph title.
+    
+    Output: Plot with results of z-test.
+    '''
+    
     fig, ax = plt.subplots()
     sns.set_style('darkgrid')
     sns.distplot(pop_z, hist = False, ax = ax, color = 'Blue', hist_kws=dict(alpha=.8), label = 'Population')
