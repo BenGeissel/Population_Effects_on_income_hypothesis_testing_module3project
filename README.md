@@ -33,13 +33,12 @@ Rob
 
 ## Summary of Files
 
-* __income_unemployment_data.xlsx__ : CSV dataset of FIPS codes, unemployment and median income
-* __county_rural_lookup.ipynb__ : workbook for extract, load, clean income unemployment dataset
-* __Mod_3_project.pdf__ : pdf of project scope
-* __Mod3Project_Ben_Rob_Technical_Audience.ipynb__ : workbook including analysis and hypothesis testing on unemployment, median income by county size
-* __Mod3Project_Ben.ipynb__ : workbook for API, extract, load, clean population data
-* __Modules.py__ : python file for project functions
-* __Pop_median_income.png__ : histogram of population median income data
-* __Pop_unempoloyment.png__ : histogram of unemployment data
-* __README.md__ : overview of project goals and responsibilities
-* __Unemplopyment.csv__ : CSV of unemployment data
+
+* __county_rural_lookup.xlsx__ : Excel workbook with county percentage rural populations.
+* __Mod_3_project.pdf__ : PDF of project scope and instructions.
+* __Mod3Project_Ben_Rob_Technical_Audience.ipynb__ : Workbook including analysis and hypothesis testing on unemployment, median income by county size.
+* __Modules.py__ : Python file for project functions. Includes all ETL work and dataframe merges.
+* __README.md__ : Overview of project goals and responsibilities.
+* __Unemplopyment.csv__ : CSV of unemployment and median income data by county.
+* __Mod3Project_Ben_Rob_Non_Technical_Audience.ipynb__ : Narrative workbook showing visualizations and hypothesis tests.
+* __Module_3_Presentation_Ben_Rob.pdf__ : Project presentation.
